@@ -1,12 +1,12 @@
 import React from 'react';
 import {ThemeProvider} from 'styled-components/native';
-import {theme} from '../themes';
-import * as S from './styles';
+import {theme} from './themes';
+import {Navigation} from './navigation';
 
 function App(): JSX.Element {
   return (
     <ThemeProvider theme={theme}>
-      <S.Container />
+      <Navigation />
     </ThemeProvider>
   );
 }
