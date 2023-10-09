@@ -1,11 +1,19 @@
 import React from 'react';
 import * as S from './styles';
-import {Button} from '../../components';
+import {Button, Spacing} from '../../components';
 
 export const MainScreen: React.FC = () => {
   return (
     <S.Container>
-      <Button />
+      <Button text="Meus cartões" onPress={() => {}} />
+      <Spacing />
+      <Button
+        text="Cadastrar um cartão"
+        onPress={() => {}}
+        variant="secondary"
+      />
+      <Spacing />
+      <Button text="Desabilitado" onPress={() => {}} disabeld />
     </S.Container>
   );
 };

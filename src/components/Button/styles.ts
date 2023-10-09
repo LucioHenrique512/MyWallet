@@ -1,15 +1,23 @@
 import {RFPercentage} from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
+import {ButtonVariants} from './types';
 
-export const Container = styled.TouchableOpacity`
+type CommonProps = {
+  variant: ButtonVariants;
+  disabled: boolean;
+  background: string;
+  color: string;
+};
+
+export const Container: any = styled.TouchableOpacity<CommonProps>`
   height: ${RFPercentage(7.25)}px;
-  background: ${({theme}) => theme.colors.turqBlue};
+  background: ${({background}) => background};
   border-radius: ${RFPercentage(1.5)}px;
   align-items: center;
   justify-content: center;
 `;
 
-export const Title = styled.Text`
+export const Title: any = styled.Text<CommonProps>`
   font-size: ${RFPercentage(2.25)}px;
-  color: ${({theme}) => theme.colors.white};
+  color: ${({color}) => color};
 `;

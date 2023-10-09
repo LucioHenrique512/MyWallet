@@ -14,6 +14,8 @@ export const theme = {
     white: '#FFFFFF',
     turqBlue: '#12C2E9',
     limeGreen: '#A5FF32',
+    lightGray: '#EEEEEE',
+    mediumGray: '#BBBBBB',
   },
 };
 
