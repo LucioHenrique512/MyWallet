@@ -17,7 +17,7 @@ export const Navigation: React.FC = () => {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      background: colors.background,
+      background: colors.deepNight,
     },
   };
 

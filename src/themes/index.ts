@@ -10,10 +10,10 @@ export const theme = {
     xl: RFPercentage(3.4),
   },
   colors: {
-    background: '#142995',
-    foreground: '#FFFFFF',
-    primaryColor: '#12C2E9',
-    secondaryColor: '#A5FF32',
+    deepNight: '#142995',
+    white: '#FFFFFF',
+    turqBlue: '#12C2E9',
+    limeGreen: '#A5FF32',
   },
 };
 
