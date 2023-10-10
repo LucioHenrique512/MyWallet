@@ -5,7 +5,7 @@ export const theme = {
     xxxs: `${RFPercentage(0.5)}px`,
     xxs: `${RFPercentage(1)}px`,
     xs: `${RFPercentage(1.5)}px`,
-    sm: `${RFPercentage(1.8)}px`,
+    sm: `${RFPercentage(1.75)}px`,
     md: `${RFPercentage(2)}px`,
     lg: `${RFPercentage(2.5)}px`,
     xl: `${RFPercentage(3.4)}px`,
@@ -18,6 +18,7 @@ export const theme = {
     limeGreen: '#A5FF32',
     lightGray: '#EEEEEE',
     mediumGray: '#BBBBBB',
+    charcoal: '#111111',
   },
 };
 

@@ -1,16 +1,26 @@
 import React from 'react';
 import * as S from './styles';
-import {Spacing, TextField} from '../../components';
-import {Button} from 'react-native';
+import {Card, Spacing} from '../../components';
 
 export const MainScreen: React.FC = () => {
   return (
     <S.Container>
-      <TextField label="Número do cartão" />
+      <Card
+        cardName="Black Card"
+        holderName="Relampago Marquinhos"
+        color="black"
+        number="1234 1234 1234 1234"
+        validtrhu="10/96"
+        onPress={() => console.log('Oi')}
+      />
       <Spacing />
-      <TextField
-        leftItem={<Button title="pressme " />}
-        label="Número do cartão"
+      <Card
+        cardName="Gree Card"
+        holderName="Relampago Marquinhos"
+        color="green"
+        number="1234 1234 1234 1234"
+        validtrhu="10/96"
+        onPress={() => console.log('Oi')}
       />
     </S.Container>
   );
