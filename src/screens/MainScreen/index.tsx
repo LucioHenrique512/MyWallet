@@ -1,27 +1,20 @@
 import React from 'react';
 import * as S from './styles';
-import {Card, Spacing} from '../../components';
+import {Background, Button, Logo, Spacing} from '../../components';
 
 export const MainScreen: React.FC = () => {
   return (
-    <S.Container>
-      <Card
-        cardName="Black Card"
-        holderName="Relampago Marquinhos"
-        color="black"
-        number="1234 1234 1234 1234"
-        validtrhu="10/96"
-        onPress={() => console.log('Oi')}
-      />
-      <Spacing />
-      <Card
-        cardName="Gree Card"
-        holderName="Relampago Marquinhos"
-        color="green"
-        number="1234 1234 1234 1234"
-        validtrhu="10/96"
-        onPress={() => console.log('Oi')}
-      />
-    </S.Container>
+    <Background>
+      <S.Container>
+        <Logo />
+        <Spacing />
+        <Spacing />
+        <S.Row>
+          <Button text="Meus cartões" onPress={() => {}} variant="secondary" />
+          <Spacing />
+          <Button text="Cadastrar cartão" onPress={() => {}} />
+        </S.Row>
+      </S.Container>
+    </Background>
   );
 };

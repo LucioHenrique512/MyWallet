@@ -8,8 +8,9 @@ export const theme = {
     sm: `${RFPercentage(1.75)}px`,
     md: `${RFPercentage(2)}px`,
     lg: `${RFPercentage(2.5)}px`,
-    xl: `${RFPercentage(3.4)}px`,
-    padding: `${RFPercentage(2)}px`,
+    xl: `${RFPercentage(3.5)}px`,
+    xxl: `${RFPercentage(4.0)}px`,
+    padding: `${RFPercentage(2.5)}px`,
   },
   colors: {
     deepNight: '#142995',
@@ -19,6 +20,7 @@ export const theme = {
     lightGray: '#EEEEEE',
     mediumGray: '#BBBBBB',
     charcoal: '#111111',
+    softGray: '#EEEEEE',
   },
 };
 
