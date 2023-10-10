@@ -12,7 +12,7 @@ describe(Button.name, () => {
   });
 
   afterEach(() => {
-    jest.restoreAllMocks(); // Limpa os mocks após cada teste
+    jest.restoreAllMocks();
   });
 
   it('renders with default colors', () => {

@@ -1,19 +1,17 @@
 import React from 'react';
 import * as S from './styles';
-import {Button, Spacing} from '../../components';
+import {Spacing, TextField} from '../../components';
+import {Button} from 'react-native';
 
 export const MainScreen: React.FC = () => {
   return (
     <S.Container>
-      <Button text="Meus cartões" onPress={() => {}} />
+      <TextField label="Número do cartão" />
       <Spacing />
-      <Button
-        text="Cadastrar um cartão"
-        onPress={() => {}}
-        variant="secondary"
+      <TextField
+        leftItem={<Button title="pressme " />}
+        label="Número do cartão"
       />
-      <Spacing />
-      <Button text="Desabilitado" onPress={() => {}} disabeld />
     </S.Container>
   );
 };
