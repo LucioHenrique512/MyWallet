@@ -12,6 +12,10 @@ import {useNavigation} from '@react-navigation/native';
 import Camera from '../../assets/camera.svg';
 import {useFormik} from 'formik';
 import * as yup from 'yup';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {NavigationParams} from '../../navigation';
+
+type NavigationProps = StackNavigationProp<NavigationParams, 'CardFormScreen'>;
 
 const validationSchema = yup.object().shape({
   number: yup
@@ -33,7 +37,7 @@ const validationSchema = yup.object().shape({
 });
 
 export const CardFormScreen: React.FC = () => {
-  const {goBack} = useNavigation();
+  const {goBack, navigate} = useNavigation<NavigationProps>();
 
   const {
     values,
@@ -48,6 +52,7 @@ export const CardFormScreen: React.FC = () => {
     initialValues: {number: '', holderName: '', validThru: '', cvv: ''},
     onSubmit: formValues => {
       console.log(formValues);
+      navigate('LoadingScreen');
     },
   });
 
@@ -106,6 +111,7 @@ export const CardFormScreen: React.FC = () => {
                   onChangeText={handleChange('validThru')}
                   onBlur={handleBlur('validThru')}
                   placeholder="04/32"
+                  maxLength={5}
                   errorText={touched?.validThru ? errors.validThru : ''}
                 />
               </S.Column>
