@@ -1,25 +1,17 @@
 import React, {useRef} from 'react';
 import * as S from './styles';
-import {TouchableWithoutFeedback} from 'react-native';
+import {TextInputProps, TouchableWithoutFeedback} from 'react-native';
 
-interface IProps {
-  value?: string;
-  onChangeText?: (text: string) => void;
+interface IProps extends TextInputProps {
   label?: string;
-  placeholder?: string;
-  secureTextEntry?: boolean;
   leftItem?: any;
+  errorText?: string;
 }
 
-export const TextField: React.FC<IProps> = ({
-  value,
-  onChangeText,
-  label,
-  placeholder,
-  secureTextEntry,
-  leftItem,
-}) => {
+export const TextField: React.FC<IProps> = props => {
   const ref = useRef<any>(null);
+
+  const {label, leftItem, errorText} = props;
 
   const onFieldPress = () => {
     if (!ref?.current) {
@@ -34,15 +26,10 @@ export const TextField: React.FC<IProps> = ({
       <TouchableWithoutFeedback onPress={onFieldPress}>
         <S.FieldContainer>
           {leftItem && <S.LeftContainer>{leftItem}</S.LeftContainer>}
-          <S.TextField
-            ref={ref}
-            onChangeText={onChangeText}
-            secureTextEntry={secureTextEntry}
-            value={value}
-            placeholder={placeholder}
-          />
+          <S.TextField ref={ref} {...props} />
         </S.FieldContainer>
       </TouchableWithoutFeedback>
+      <S.ErrorText>{errorText}</S.ErrorText>
     </S.Container>
   );
 };

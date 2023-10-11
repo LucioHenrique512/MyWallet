@@ -21,6 +21,7 @@ export const theme = {
     mediumGray: '#BBBBBB',
     charcoal: '#111111',
     softGray: '#EEEEEE',
+    errorRed: '#D32F2F',
   },
 };
 

@@ -6,7 +6,7 @@ export const Container = styled.View``;
 export const Label = styled.Text`
   font-size: ${({theme}) => theme.size.sm};
   color: ${({theme}) => theme.colors.mediumGray};
-  margin: ${({theme}) => theme.size.xs} 0px;
+  margin-bottom: ${({theme}) => theme.size.xxs};
 `;
 
 export const FieldContainer = styled.View`
@@ -28,4 +28,9 @@ export const TextField = styled.TextInput`
   font-size: ${({theme}) => theme.size.md};
   flex: 1;
   padding-left: ${({theme}) => theme.size.xxs};
+`;
+
+export const ErrorText = styled.Text`
+  font-size: ${({theme}) => theme.size.xs};
+  color: ${({theme}) => theme.colors.errorRed};
 `;
