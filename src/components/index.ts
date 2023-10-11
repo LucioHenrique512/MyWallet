@@ -4,3 +4,4 @@ export {TextField} from './TextField';
 export {Card} from './Card';
 export {Background} from './Background';
 export {Logo} from './Logo';
+export {TopBar} from './TopBar';
