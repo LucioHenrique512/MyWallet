@@ -29,7 +29,9 @@ export const Navigation: React.FC = () => {
 
   return (
     <NavigationContainer theme={navTheme}>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Navigator
+        initialRouteName={'MainScreen'}
+        screenOptions={{headerShown: false}}>
         <Stack.Screen name="MainScreen" component={MainScreen} />
         <Stack.Screen name="CardFormScreen" component={CardFormScreen} />
         <Stack.Screen name="WalletScreen" component={WalletScreen} />

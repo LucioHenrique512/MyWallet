@@ -20,6 +20,7 @@ export const TopBar: React.FC<IProps> = ({
   whiteBackground,
 }) => {
   const shadow = {
+    zIndex: 1,
     shadowColor: '#000000',
     shadowOffset: {
       width: 0,
