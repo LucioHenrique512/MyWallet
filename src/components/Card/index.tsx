@@ -7,8 +7,8 @@ interface IProps {
   holderName: string;
   number: string;
   validtrhu: string;
-  color: string;
-  onPress: () => void;
+  isBlack?: boolean;
+  onPress?: () => void;
 }
 
 export const Card: React.FC<IProps> = ({
@@ -16,17 +16,17 @@ export const Card: React.FC<IProps> = ({
   holderName,
   number,
   validtrhu,
-  color,
+  isBlack,
   onPress,
 }) => {
   return (
     <TouchableWithoutFeedback onPress={onPress} testID="card-container">
-      <S.Container color={color}>
-        <S.CardName>{cardName}</S.CardName>
+      <S.Container isBlack={isBlack}>
+        <S.CardName isBlack={isBlack}>{cardName}</S.CardName>
         <S.InfoContainer>
-          <S.HolderName>{holderName}</S.HolderName>
-          <S.Number>{number}</S.Number>
-          <S.ValidThru>Validade {validtrhu}</S.ValidThru>
+          <S.HolderName isBlack={isBlack}>{holderName}</S.HolderName>
+          <S.Number isBlack={isBlack}>{number}</S.Number>
+          <S.ValidThru isBlack={isBlack}>Validade {validtrhu}</S.ValidThru>
         </S.InfoContainer>
       </S.Container>
     </TouchableWithoutFeedback>
