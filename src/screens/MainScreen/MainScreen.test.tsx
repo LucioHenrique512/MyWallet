@@ -32,12 +32,12 @@ describe(MainScreen.name, () => {
     expect(getByText('Cadastrar cartão')).toBeTruthy();
   });
 
-  it('should navigates to WalletScreen when "Meus cartões" button is pressed', () => {
+  it('should navigates to LoadingCardsScreen when "Meus cartões" button is pressed', () => {
     const {getByText} = testRender(<MainScreen />);
 
     fireEvent.press(getByText('Meus cartões'));
 
-    expect(mockNavigate).toHaveBeenCalledWith('WalletScreen');
+    expect(mockNavigate).toHaveBeenCalledWith('LoadingCardsScreen');
   });
 
   it('should navigates to CardFormScreen when "Cadastrar cartão" button is pressed', () => {

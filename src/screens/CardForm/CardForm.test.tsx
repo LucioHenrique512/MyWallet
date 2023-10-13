@@ -2,6 +2,15 @@ import React from 'react';
 import {act, cleanup, fireEvent, waitFor} from '@testing-library/react-native';
 import {CardFormScreen} from '.';
 import {createMockEvent, testRender} from '../../utils/testUtils';
+import {postCard} from '../../api';
+import Toast from 'react-native-toast-message';
+
+jest.mock('../../api');
+
+const mockToastShow = jest.fn();
+Toast.show = mockToastShow;
+
+const postCardMock = postCard as jest.MockedFunction<typeof postCard>;
 
 jest.mock('@react-navigation/native', () => ({
   useNavigation: jest.fn(() => ({
@@ -18,7 +27,7 @@ describe(CardFormScreen.name, () => {
   beforeEach(() => {
     jest.clearAllMocks();
     const useNavigation = require('@react-navigation/native').useNavigation;
-    useNavigation.mockReturnValue({navigate: mockNavigate});
+    useNavigation.mockReturnValue({replace: mockNavigate});
   });
 
   afterEach(cleanup);
@@ -89,7 +98,9 @@ describe(CardFormScreen.name, () => {
     });
   });
 
-  it('should allow to proceed when all fields are correct', async () => {
+  it('should navigate to LoadingCardsScreen when all fields are correct', async () => {
+    postCardMock.mockResolvedValue({status: 200} as any);
+
     const {getByTestId, getByText} = testRender(<CardFormScreen />);
 
     const numberInput = getByTestId('card-number');
@@ -106,7 +117,62 @@ describe(CardFormScreen.name, () => {
     fireEvent.press(button);
 
     await waitFor(() => {
-      expect(mockNavigate).toHaveBeenCalledWith('LoadingScreen');
+      expect(mockNavigate).toHaveBeenCalledWith('LoadingCardsScreen');
+    });
+  });
+
+  it('should call postCard when all fields are correct', async () => {
+    postCardMock.mockResolvedValue({status: 200} as any);
+
+    const {getByTestId, getByText} = testRender(<CardFormScreen />);
+
+    const numberInput = getByTestId('card-number');
+    const holderNameInput = getByTestId('card-holderName');
+    const validThruInput = getByTestId('valid-thru');
+    const cvvInput = getByTestId('card-CVV');
+
+    fireEvent.changeText(numberInput, '1234 5678 1234 5678');
+    fireEvent.changeText(holderNameInput, 'Lúcio');
+    fireEvent.changeText(validThruInput, '12/25');
+    fireEvent.changeText(cvvInput, '123');
+
+    const button = getByText('Avançar');
+    fireEvent.press(button);
+
+    await waitFor(() => {
+      expect(postCardMock).toHaveBeenCalledWith({
+        cvv: '123',
+        holderName: 'Lúcio',
+        number: '1234 5678 1234 5678',
+        validThru: '12/25',
+      });
+    });
+  });
+
+  it.only('should display error when request fail', async () => {
+    postCardMock.mockRejectedValue({status: 400} as any);
+
+    const {getByTestId, getByText} = testRender(<CardFormScreen />);
+
+    const numberInput = getByTestId('card-number');
+    const holderNameInput = getByTestId('card-holderName');
+    const validThruInput = getByTestId('valid-thru');
+    const cvvInput = getByTestId('card-CVV');
+
+    fireEvent.changeText(numberInput, '1234 5678 1234 5678');
+    fireEvent.changeText(holderNameInput, 'Lúcio');
+    fireEvent.changeText(validThruInput, '12/25');
+    fireEvent.changeText(cvvInput, '123');
+
+    const button = getByText('Avançar');
+    fireEvent.press(button);
+
+    await waitFor(() => {
+      expect(mockToastShow).toHaveBeenCalledWith({
+        type: 'error',
+        text1: 'Não foi possível cadastrar esse cartão',
+        text2: 'Favor tente novamente em alguns instantes',
+      });
     });
   });
 });
