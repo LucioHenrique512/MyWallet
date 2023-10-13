@@ -2,6 +2,7 @@ import React from 'react';
 import {fireEvent} from '@testing-library/react-native';
 import {TextField} from '.';
 import {testRender} from '../../utils/testUtils';
+import {Text} from 'react-native';
 
 describe(TextField.name, () => {
   it('should renders the label correctly', () => {
@@ -27,5 +28,18 @@ describe(TextField.name, () => {
     fireEvent.changeText(input, 'Novo nome');
 
     expect(onChangeTextMock).toHaveBeenCalledWith('Novo nome');
+  });
+
+  it('should render component passed by parameter correctly', () => {
+    const text = 'Hello world1';
+
+    const {getByText} = testRender(
+      <TextField
+        placeholder="Digite seu nome"
+        leftItem={<Text>{text}</Text>}
+      />,
+    );
+
+    expect(getByText(text)).toBeTruthy();
   });
 });

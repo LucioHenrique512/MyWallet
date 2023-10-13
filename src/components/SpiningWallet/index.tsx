@@ -28,8 +28,8 @@ export const SpinningWallet = () => {
   });
 
   return (
-    <Animated.View style={animatedStyle}>
-      <WalletIcon />
+    <Animated.View style={animatedStyle} testID="animated-view">
+      <WalletIcon testID="wallet-icon" />
     </Animated.View>
   );
 };

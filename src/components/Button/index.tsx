@@ -19,12 +19,13 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <S.Container
+      testID={'button'}
       background={colors.background}
       variant={variant}
       onPress={onPress}
       disabled={isDisabled}>
       {loading ? (
-        <ActivityIndicator />
+        <ActivityIndicator testID="activity-indicator" />
       ) : (
         <S.Title color={colors.color} variant={variant} disabled={disabeld}>
           {text}

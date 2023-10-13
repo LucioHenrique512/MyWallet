@@ -15,3 +15,5 @@ jest.mock('react-native-reanimated', () => {
 
 // As of react-native@0.64.X file has moved
 //jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
+
+//require('react-native-reanimated').setUpTests();

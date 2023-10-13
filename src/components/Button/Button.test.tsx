@@ -63,4 +63,35 @@ describe(Button.name, () => {
       expect(onPressMock).not.toHaveBeenCalled();
     });
   });
+
+  describe('on loading', () => {
+    it('should renders disabled button', () => {
+      const {getByTestId} = testRender(
+        <Button text="Click me" onPress={jest.fn()} loading={true} />,
+      );
+      const button = getByTestId('button');
+      expect(button.props.style.backgroundColor).toBe(theme.colors.lightGray);
+    });
+
+    it('should not fires onPress event', () => {
+      const onPressMock = jest.fn();
+      const {getByTestId} = testRender(
+        <Button text="Click me" onPress={onPressMock} loading={true} />,
+      );
+      const button = getByTestId('button');
+
+      fireEvent.press(button);
+      expect(onPressMock).not.toHaveBeenCalled();
+    });
+
+    it('should render activity-indicator', () => {
+      const onPressMock = jest.fn();
+      const {getByTestId} = testRender(
+        <Button text="Click me" onPress={onPressMock} loading={true} />,
+      );
+      const indicator = getByTestId('activity-indicator');
+
+      expect(indicator).toBeTruthy();
+    });
+  });
 });
