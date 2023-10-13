@@ -15,9 +15,10 @@ import {FormikValues} from 'formik';
 interface IProps {
   formik: FormikValues;
   goBack: () => void;
+  loading?: boolean;
 }
 
-export const CardFormView: React.FC<IProps> = ({formik, goBack}) => {
+export const CardFormView: React.FC<IProps> = ({formik, goBack, loading}) => {
   const {
     values,
     errors,
@@ -104,6 +105,7 @@ export const CardFormView: React.FC<IProps> = ({formik, goBack}) => {
               onPress={onSubmitPress}
               text="Avançar"
               variant="secondary"
+              loading={loading}
               disabeld={!isValid}
             />
           </S.FormContainer>

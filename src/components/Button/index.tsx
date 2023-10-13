@@ -2,26 +2,34 @@ import React from 'react';
 import * as S from './styles';
 import {ButtonProps, ButtonVariants} from './types';
 import {DefaultTheme, useTheme} from 'styled-components/native';
+import {ActivityIndicator} from 'react-native';
 
 export const Button: React.FC<ButtonProps> = ({
   text,
   onPress,
   disabeld,
   variant,
+  loading,
 }) => {
   const theme = useTheme();
 
-  const colors = getButtonColors(theme, disabeld, variant);
+  const isDisabled = disabeld || loading;
+
+  const colors = getButtonColors(theme, isDisabled, variant);
 
   return (
     <S.Container
       background={colors.background}
       variant={variant}
       onPress={onPress}
-      disabled={disabeld}>
-      <S.Title color={colors.color} variant={variant} disabled={disabeld}>
-        {text}
-      </S.Title>
+      disabled={isDisabled}>
+      {loading ? (
+        <ActivityIndicator />
+      ) : (
+        <S.Title color={colors.color} variant={variant} disabled={disabeld}>
+          {text}
+        </S.Title>
+      )}
     </S.Container>
   );
 };

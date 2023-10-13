@@ -5,4 +5,5 @@ export interface ButtonProps {
   onPress: () => void;
   disabeld?: boolean;
   variant?: ButtonVariants;
+  loading?: boolean;
 }

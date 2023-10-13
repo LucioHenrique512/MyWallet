@@ -1,5 +1,5 @@
 export type CardType = {
-  id: string;
+  id?: string;
   number: string;
   cvv: string;
   holderName: string;

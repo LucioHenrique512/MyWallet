@@ -1,43 +1,44 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {useFormik} from 'formik';
-import * as yup from 'yup';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {NavigationParams} from '../../navigation';
 import {CardFormView} from './View';
+import {validationSchema} from './validation';
+import {CardType} from '../../types';
+import Toast from 'react-native-toast-message';
+import {postCard} from '../../api';
 
 type NavigationProps = StackNavigationProp<NavigationParams, 'CardFormScreen'>;
 
-const validationSchema = yup.object().shape({
-  number: yup
-    .string()
-    .length(19, 'o campo número deve ter exatamente 16 dígitos.')
-    .required('o campo número campo é obrigatório.'),
-  holderName: yup.string().required('O campo nome é obrigatório.'),
-  validThru: yup
-    .string()
-    .matches(
-      /^(0[1-9]|1[0-2])\/\d{2}$/,
-      'O campo vencimento deve estar no formato mm/aa.',
-    )
-    .required('O campo vencimento é obrigatório.'),
-  cvv: yup
-    .string()
-    .min(3, 'CVV deve ter pelo menos 3 dígitos')
-    .required('O campo cvv é obrigatório.'),
-});
-
 export const CardFormScreen: React.FC = () => {
-  const {goBack, navigate} = useNavigation<NavigationProps>();
+  const {goBack, replace} = useNavigation<NavigationProps>();
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const submitForm = async (data: CardType) => {
+    try {
+      setLoading(true);
+      await postCard(data);
+      replace('WalletScreen');
+    } catch (error) {
+      console.log('Error ->', error);
+      Toast.show({
+        type: 'error',
+        text1: 'Não foi possível cadastrar esse cartão',
+        text2: 'Favor tente novamente em alguns instantes',
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const formik = useFormik({
     validationSchema: validationSchema,
     initialValues: {number: '', holderName: '', validThru: '', cvv: ''},
     onSubmit: formValues => {
-      console.log(formValues);
-      navigate('LoadingScreen');
+      submitForm(formValues as CardType);
     },
   });
 
-  return <CardFormView formik={formik} goBack={goBack} />;
+  return <CardFormView formik={formik} goBack={goBack} loading={loading} />;
 };

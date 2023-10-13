@@ -5,13 +5,13 @@ import {useTheme} from 'styled-components/native';
 import {MainScreen} from './screens/MainScreen';
 import {CardFormScreen} from './screens/CardForm';
 import {WalletScreen} from './screens/Wallet/indes';
-import {LoadingScreen} from './screens/LoadingScreen';
+import {LoadingCardsScreen} from './screens/LoadingCardsScreen';
 
 export type NavigationParams = {
   MainScreen: undefined;
   CardFormScreen: undefined;
   WalletScreen: undefined;
-  LoadingScreen: undefined;
+  LoadingCardsScreen: undefined;
 };
 
 const Stack = createStackNavigator<NavigationParams>();
@@ -35,7 +35,10 @@ export const Navigation: React.FC = () => {
         <Stack.Screen name="MainScreen" component={MainScreen} />
         <Stack.Screen name="CardFormScreen" component={CardFormScreen} />
         <Stack.Screen name="WalletScreen" component={WalletScreen} />
-        <Stack.Screen name="LoadingScreen" component={LoadingScreen} />
+        <Stack.Screen
+          name="LoadingCardsScreen"
+          component={LoadingCardsScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

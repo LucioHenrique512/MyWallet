@@ -9,7 +9,7 @@ type NavigationProps = StackNavigationProp<NavigationParams, 'MainScreen'>;
 export const MainScreen: React.FC = () => {
   const {navigate} = useNavigation<NavigationProps>();
 
-  const onWalletPress = () => navigate('LoadingScreen');
+  const onWalletPress = () => navigate('LoadingCardsScreen');
   const onCardFormPress = () => navigate('CardFormScreen');
 
   return (
