@@ -1,12 +1,14 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import * as S from './styles';
-import {Card} from '../../components';
+import {Button, Card} from '../../components';
 import {CardState, CardType} from '../../types';
 import {
   Easing,
   interpolate,
+  runOnJS,
   useAnimatedStyle,
   useSharedValue,
+  withDelay,
   withTiming,
 } from 'react-native-reanimated';
 
@@ -15,15 +17,19 @@ interface IProps {
   index: number;
   cardState?: CardState;
   onCardPress: () => void;
+  onButtonPress: () => void;
 }
 
 export const AnimatedCard: React.FC<IProps> = ({
   item,
   onCardPress,
   cardState,
-  index,
+  onButtonPress,
 }) => {
   const translateY = useSharedValue(0);
+  const buttonOpacity = useSharedValue(0);
+
+  const [renderButton, setRenderButton] = useState(false);
 
   useEffect(() => {
     const easingOptions = {
@@ -31,16 +37,23 @@ export const AnimatedCard: React.FC<IProps> = ({
       easing: Easing.bezier(0.25, -0.5, 0.25, 1),
     };
 
-    //console.log(index);
+    const onButtonDesapear = () => {
+      'worklet';
+      runOnJS(setRenderButton)(false);
+    };
 
     if (cardState === CardState.SELECTED) {
+      setRenderButton(true);
       translateY.value = withTiming(-90, easingOptions);
+      buttonOpacity.value = withDelay(300, withTiming(1, {duration: 600}));
     } else if (cardState === CardState.UNSELECTED) {
       translateY.value = withTiming(350, easingOptions);
+      buttonOpacity.value = withTiming(0, {duration: 200}, onButtonDesapear);
     } else {
       translateY.value = withTiming(0, easingOptions);
+      buttonOpacity.value = withTiming(0, {duration: 200}, onButtonDesapear);
     }
-  }, [cardState, translateY, index]);
+  }, [cardState, translateY, buttonOpacity]);
 
   const cardAnimatedSyle = useAnimatedStyle(() => {
     const containerHeight = interpolate(
@@ -55,8 +68,14 @@ export const AnimatedCard: React.FC<IProps> = ({
     };
   });
 
+  const buttonAnimatedSyle = useAnimatedStyle(() => {
+    return {
+      opacity: buttonOpacity.value,
+    };
+  });
+
   return (
-    <S.CardContainer key={item.id} style={cardAnimatedSyle}>
+    <S.AnimatedCardContainer key={item.id} style={cardAnimatedSyle}>
       <Card
         cardName={item.cardName}
         holderName={item.holderName}
@@ -65,6 +84,15 @@ export const AnimatedCard: React.FC<IProps> = ({
         isBlack={item.isBlack}
         onPress={onCardPress}
       />
-    </S.CardContainer>
+      {renderButton && (
+        <S.AnimatedButtonContainer style={buttonAnimatedSyle}>
+          <Button
+            text="Pagar com esse cartão"
+            onPress={onButtonPress}
+            variant="secondary"
+          />
+        </S.AnimatedButtonContainer>
+      )}
+    </S.AnimatedCardContainer>
   );
 };

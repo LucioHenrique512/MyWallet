@@ -29,17 +29,30 @@ export const TopTitle = styled.Text`
   color: ${({theme}) => theme.colors.turqBlue};
 `;
 
-export const AnimatedCardList = styled(Animated.FlatList)`
+export const AnimationContainer = styled.View`
   flex: 1;
+  align-items: center;
+  justify-content: center;
   padding: 0px ${({theme}) => theme.size.padding};
-  position: relative;
 `;
 
-export const CardContainer = styled(Animated.View)`
+export const AnimatedCardList = styled.FlatList`
+  flex: 1;
   width: 100%;
+`;
+
+export const AnimatedCardContainer = styled(Animated.View)`
+  width: 100%;
+  position: relative;
 `;
 
 export const SafeAreaBottom: any = styled.View<{height: number}>`
   width: 100%;
   height: ${({height}) => height}px;
+`;
+
+export const AnimatedButtonContainer = styled(Animated.View)`
+  position: absolute;
+  width: 100%;
+  top: ${RFPercentage(33)}px;
 `;

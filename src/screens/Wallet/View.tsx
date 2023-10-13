@@ -5,6 +5,11 @@ import Times from '../../assets/times.svg';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {AnimatedCard} from './AnimatedCard';
 import {CardState, CardType} from '../../types';
+import {
+  CardsStateType,
+  getSelectedCardsState,
+  initCardsState,
+} from '../../services/cardServices';
 
 export type CardListState = {state: CardState; id?: string};
 
@@ -22,48 +27,36 @@ export const WalletView: React.FC<IProps> = ({
   onSelectCard,
 }) => {
   const insets = useSafeAreaInsets();
-  const [cardListState, setCardListState] = useState<CardListState[]>([]);
-  const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>();
+  const [cardsState, setCardsState] = useState<CardsStateType>({});
+  const [selectedCardId, setSelectedCardId] = useState<string | null>();
 
   useEffect(() => {
-    setCardListState(cards.map(({id}) => ({state: CardState.INERT, id})));
-  }, [cards]);
+    const state = initCardsState(cards);
 
-  // const changeCardPosition = (index: number) => {
-  //   const newCards = [...cards];
+    setCardsState(state);
+  }, [cards, insets]);
 
-  //   const [pressedCard] = newCards.splice(index, 1);
-  //   newCards.push(pressedCard);
-  //   setCards(newCards);
-  // };
-
-  const changeCardState = (pressedIndex: number) => {
-    const newCardListState = [...cardListState];
-
-    const newState = newCardListState.map((item, index) => {
-      if (pressedIndex === index) {
-        return {...item, state: CardState.SELECTED};
-      }
-      return {...item, state: CardState.UNSELECTED};
-    });
-
-    setCardListState(newState);
+  const updateSelectedCardState = (id: string) => {
+    const newState = getSelectedCardsState(cardsState, id.toString());
+    setCardsState(newState);
   };
 
-  const resetCardState = () =>
-    setCardListState(
-      cardListState.map(item => ({...item, state: CardState.INERT})),
-    );
+  const resetCardState = () => {
+    setCardsState(initCardsState(cards));
+  };
 
-  const onCardPress = (card: CardType, index: number) => {
-    if (selectedCardIndex === index) {
-      setSelectedCardIndex(null);
+  const onCardPress = (card: CardType) => {
+    if (selectedCardId === card.id) {
+      setSelectedCardId(null);
       resetCardState();
       return;
     }
+    setSelectedCardId(card.id);
+    updateSelectedCardState(card.id as string);
+  };
+
+  const onButtonPress = (card: CardType) => {
     onSelectCard(card);
-    setSelectedCardIndex(index);
-    changeCardState(index);
   };
 
   const contentContainerStyle: any = {paddingTop: '40%'};
@@ -85,19 +78,22 @@ export const WalletView: React.FC<IProps> = ({
       <S.TopTitleContainer>
         <S.TopTitle>Meus cartões</S.TopTitle>
       </S.TopTitleContainer>
-      <S.AnimatedCardList
-        data={cards}
-        renderItem={({item, index}) => (
-          <AnimatedCard
-            key={item.id}
-            item={item}
-            index={index}
-            cardState={cardListState[index]?.state}
-            onCardPress={() => onCardPress(item, index)}
-          />
-        )}
-        contentContainerStyle={contentContainerStyle}
-      />
+      <S.AnimationContainer>
+        <S.AnimatedCardList
+          data={cards}
+          renderItem={({item, index}) => (
+            <AnimatedCard
+              key={item.id}
+              item={item}
+              index={index}
+              cardState={cardsState[item.id as string]}
+              onButtonPress={() => onButtonPress(item)}
+              onCardPress={() => onCardPress(item)}
+            />
+          )}
+          contentContainerStyle={contentContainerStyle}
+        />
+      </S.AnimationContainer>
       <S.SafeAreaBottom height={insets.bottom} />
     </S.Container>
   );
