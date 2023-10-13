@@ -70,7 +70,7 @@ export const WalletView: React.FC<IProps> = ({
         onBackPress={goBack}
         enableShadow
         rightItem={
-          <S.AddButton onPress={onCardFormPress}>
+          <S.AddButton testID="add-card-button" onPress={onCardFormPress}>
             <Times />
           </S.AddButton>
         }

@@ -29,34 +29,3 @@ export const WalletScreen: React.FC = () => {
     />
   );
 };
-
-// const data: {cards: CardType[]} = {
-//   cards: [
-//     {
-//       id: '4ec42ba9-50af-40d2-af90-8312edbd9ca1',
-//       number: '3529 5435 3355 8727',
-//       cvv: '317',
-//       holderName: 'Exegese Peregrino',
-//       validThru: '16/46',
-//       cardName: 'Route Bank',
-//       isBlack: true,
-//     },
-//     {
-//       id: '4ec42ba9-50af-40d2-af90-8312edbd9ca2',
-//       number: '3529 5435 3355 8727',
-//       cvv: '317',
-//       holderName: 'Estrombolito Atonito',
-//       validThru: '14/36',
-//       cardName: 'Route Bank',
-//     },
-//     {
-//       id: '4ec42ba9-50af-40d2-af90-8312edbd9ca3',
-//       number: '3529 5435 3355 8727',
-//       cvv: '317',
-//       holderName: 'Relampago Marquinhos',
-//       validThru: '14/36',
-//       cardName: 'Black Bank',
-//       isBlack: true,
-//     },
-//   ],
-// };

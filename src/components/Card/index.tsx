@@ -3,7 +3,7 @@ import {TouchableWithoutFeedback} from 'react-native';
 import * as S from './styles';
 
 interface IProps {
-  cardName: string;
+  cardName?: string;
   holderName: string;
   number: string;
   validtrhu: string;

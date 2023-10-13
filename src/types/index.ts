@@ -1,10 +1,10 @@
 export type CardType = {
-  id?: string;
+  id?: any;
   number: string;
   cvv: string;
   holderName: string;
   validThru: string;
-  cardName: string;
+  cardName?: string;
   isBlack?: boolean;
 };
 

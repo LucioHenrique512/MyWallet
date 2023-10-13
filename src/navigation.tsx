@@ -4,7 +4,7 @@ import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {useTheme} from 'styled-components/native';
 import {MainScreen} from './screens/MainScreen';
 import {CardFormScreen} from './screens/CardForm';
-import {WalletScreen} from './screens/Wallet/indes';
+import {WalletScreen} from './screens/Wallet';
 import {LoadingCardsScreen} from './screens/LoadingCardsScreen';
 
 export type NavigationParams = {
