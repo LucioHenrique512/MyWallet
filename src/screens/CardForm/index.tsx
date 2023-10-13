@@ -21,7 +21,6 @@ export const CardFormScreen: React.FC = () => {
       await postCard(data);
       replace('LoadingCardsScreen');
     } catch (error) {
-      console.log('Error ->', error);
       Toast.show({
         type: 'error',
         text1: 'Não foi possível cadastrar esse cartão',
