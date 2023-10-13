@@ -149,7 +149,7 @@ describe(CardFormScreen.name, () => {
     });
   });
 
-  it.only('should display error when request fail', async () => {
+  it('should display error when request fail', async () => {
     postCardMock.mockRejectedValue({status: 400} as any);
 
     const {getByTestId, getByText} = testRender(<CardFormScreen />);
