@@ -19,7 +19,7 @@ export const CardFormScreen: React.FC = () => {
     try {
       setLoading(true);
       await postCard(data);
-      replace('WalletScreen');
+      replace('LoadingCardsScreen');
     } catch (error) {
       console.log('Error ->', error);
       Toast.show({
