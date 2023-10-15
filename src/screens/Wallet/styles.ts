@@ -54,5 +54,5 @@ export const SafeAreaBottom: any = styled.View<{height: number}>`
 export const AnimatedButtonContainer = styled(Animated.View)`
   position: absolute;
   width: 100%;
-  top: ${RFPercentage(33)}px;
+  top: ${230}px;
 `;

@@ -42,7 +42,7 @@ export const AnimatedCard: React.FC<IProps> = ({
       runOnJS(setRenderButton)(false);
     };
 
-    const unselectedTranslateY = index !== 0 ? 200 : 355 - index * index;
+    const unselectedTranslateY = index !== 0 ? 210 : 365 - index * index;
 
     if (cardState === CardState.SELECTED) {
       setRenderButton(true);
