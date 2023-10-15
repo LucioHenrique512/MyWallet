@@ -11,7 +11,7 @@ MyWallet é uma aplicação móvel desenvolvida em React Native para implementa�
 - React Native CLI
 - Android Studio ou Xcode (dependendo do sistema operacional alvo)
 
-## Instalação
+## Build
 
 1. Clone o repositório para sua máquina local:
 
@@ -59,20 +59,25 @@ MyWallet é uma aplicação móvel desenvolvida em React Native para implementa�
    yarn ios
    ```
 
-## Scripts Adicionais
-- Para iniciar o servidor JSON (mock):
+## Para executar em modo desenvolvimento
+1 - Inicie o servidor JSON (mock):
 
   ```bash
   yarn server
   ```
 
-- Para iniciar o servidor de desenvolvimento:
+2 - Inicie o servidor de desenvolvimento:
 
   ```bash
   yarn start
   ```
+> `No Android` caso o app esteja enfrentando problemas para acessar o json-server que está rodando localmente execute o comando a baixo 
 
-- Para executar os testes:
+```bash 
+adb reverse tcp:3000 tcp:3000
+```
+
+### Para executar os testes:
 
   ```bash
   yarn test
