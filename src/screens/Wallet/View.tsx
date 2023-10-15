@@ -81,6 +81,7 @@ export const WalletView: React.FC<IProps> = ({
       <S.AnimationContainer>
         <S.AnimatedCardList
           data={cards}
+          showsVerticalScrollIndicator={false}
           renderItem={({item, index}) => (
             <AnimatedCard
               key={item.id}

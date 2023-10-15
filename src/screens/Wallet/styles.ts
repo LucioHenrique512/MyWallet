@@ -43,7 +43,7 @@ export const AnimatedCardList = styled.FlatList`
 
 export const AnimatedCardContainer = styled(Animated.View)`
   width: 100%;
-  position: relative;
+  bottom: 0;
 `;
 
 export const SafeAreaBottom: any = styled.View<{height: number}>`
